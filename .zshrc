@@ -144,3 +144,5 @@ export API_ID="94575"
 
 # LLVM configuration
 export PATH=$PATH:/usr/lib/llvm14/bin
+
+fastfetch
