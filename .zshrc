@@ -106,6 +106,8 @@ source $ZSH/oh-my-zsh.sh
 # opam configuration
 [[ ! -r /home/fcb/.opam/opam-init/init.zsh ]] || source /home/fcb/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null
 
+# rust configuration
+. "$HOME/.cargo/env"
 
 # Latex configuration
 export BIBINPUTS=$HOME/texmf/tex/latex/adapt-lab/trunk/bibs:.
@@ -129,3 +131,16 @@ vimbib() { # it assumes to have $BIBINPUTS set and with the dir to look into as 
 
   vim -p "${bibs[@]}"
 }
+
+# pkg-config configuration
+export PKG_CONFIG_PATH=$HOME/lib/tdlib/lib/pkgconfig/:$PKG_CONFIG_PATH
+
+# dynmic linker configuration
+export LD_LIBRARY_PATH=$HOME/lib/tdlib/lib/:$LD_LIBRARY_PATH
+
+# Telegram API configuration
+export API_HASH="a3406de8d171bb422bb6ddf3bbd800e2"
+export API_ID="94575"
+
+# LLVM configuration
+export PATH=$PATH:/usr/lib/llvm14/bin
