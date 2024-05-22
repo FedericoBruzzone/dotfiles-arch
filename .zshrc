@@ -109,6 +109,9 @@ source $ZSH/oh-my-zsh.sh
 # rust configuration
 . "$HOME/.cargo/env"
 
+# Svn configuration
+export SVN_EDITOR=nvim
+
 # Latex configuration
 export BIBINPUTS=$HOME/texmf/tex/latex/adapt-lab/trunk/bibs:.
 
@@ -133,10 +136,10 @@ vimbib() { # it assumes to have $BIBINPUTS set and with the dir to look into as 
 }
 
 # pkg-config configuration
-export PKG_CONFIG_PATH=$HOME/lib/tdlib/lib/pkgconfig/:$PKG_CONFIG_PATH
+# export PKG_CONFIG_PATH=$HOME/lib/tdlib/lib/pkgconfig/:$PKG_CONFIG_PATH
 
 # dynmic linker configuration
-export LD_LIBRARY_PATH=$HOME/lib/tdlib/lib/:$LD_LIBRARY_PATH
+# export LD_LIBRARY_PATH=$HOME/lib/tdlib/lib/:$LD_LIBRARY_PATH
 
 # Telegram API configuration
 export API_HASH="a3406de8d171bb422bb6ddf3bbd800e2"
