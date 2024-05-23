@@ -148,4 +148,19 @@ export API_ID="94575"
 # LLVM configuration
 export PATH=$PATH:/usr/lib/llvm14/bin
 
+# Xrandr configuration
+alias start_second_monitor_right='xrandr --output HDMI-1-1 --auto --right-of eDP-1'
+alias start_second_monitor_left='xrandr --output HDMI-1-1 --auto --left-of eDP-1'
+alias start_second_monitor_above='xrandr --output HDMI-1-1 --auto --above eDP-1'
+alias start_second_monitor_below='xrandr --output HDMI-1-1 --auto --below eDP-1'
+alias stop_second_monitor='xrandr --output HDMI-1-1 --off'
+
+brightness_p1() {
+    xrandr --output eDP-1 --brightness $(echo "$(xrandr --verbose | grep -m 1 -i brightness | cut -f2 -d ' ') + 0.1" | bc)
+}
+
+brightness_m1() {
+    xrandr --output eDP-1 --brightness $(echo "$(xrandr --verbose | grep -m 1 -i brightness | cut -f2 -d ' ') - 0.1" | bc)
+}
+
 fastfetch
