@@ -109,6 +109,10 @@ source $ZSH/oh-my-zsh.sh
 # rust configuration
 . "$HOME/.cargo/env"
 
+# Git configuration
+alias clear_git_cache='git rm -r --cached .'  # remove all files from the git cache
+alias clear_git_tags='git tag -l | xargs git tag -d'  # remove all tags from the git repository
+
 # Svn configuration
 export SVN_EDITOR=nvim
 
