@@ -145,6 +145,9 @@ vimbib() { # it assumes to have $BIBINPUTS set and with the dir to look into as 
 # dynmic linker configuration
 # export LD_LIBRARY_PATH=$HOME/lib/tdlib/lib/:$LD_LIBRARY_PATH
 
+# tgt
+# export LOCAL_TDLIB_PATH=$HOME/lib/tdlib
+
 # Telegram API configuration
 export API_HASH="a3406de8d171bb422bb6ddf3bbd800e2"
 export API_ID="94575"
