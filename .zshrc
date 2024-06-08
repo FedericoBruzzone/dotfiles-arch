@@ -149,8 +149,11 @@ vimbib() { # it assumes to have $BIBINPUTS set and with the dir to look into as 
 export LOCAL_TDLIB_PATH=$HOME/lib/tdlib
 
 # Telegram API configuration
-export API_HASH="a3406de8d171bb422bb6ddf3bbd800e2"
 export API_ID="94575"
+export API_HASH="a3406de8d171bb422bb6ddf3bbd800e2"
+
+# Visual Studio Code configuration
+export PATH="$HOME/code/bin:$PATH"
 
 # LLVM configuration
 export PATH=$PATH:/usr/lib/llvm14/bin

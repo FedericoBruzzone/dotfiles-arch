@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Visual Studio Code
+Comment=Code Editing. Redefined.
+Exec=~/code/bin/code
+Icon=~/code/resources/app/resources/linux/code.png
+Type=Application
+Terminal=false
+Categories=Development;IDE;
+
