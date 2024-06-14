@@ -1,0 +1,1 @@
+Default bar height: 44

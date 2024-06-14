@@ -139,24 +139,25 @@ vimbib() { # it assumes to have $BIBINPUTS set and with the dir to look into as 
   vim -p "${bibs[@]}"
 }
 
+
+# tgt
+export LOCAL_TDLIB_PATH=$HOME/lib/tdlib
+
+# LLVM configuration
+export PATH=$PATH:/usr/lib/llvm14/bin
+
+# Telegram API configuration
+# export API_ID="94575"
+# export API_HASH="a3406de8d171bb422bb6ddf3bbd800e2"
+
 # pkg-config configuration
 # export PKG_CONFIG_PATH=$HOME/lib/tdlib/lib/pkgconfig/:$PKG_CONFIG_PATH
 
 # dynmic linker configuration
 # export LD_LIBRARY_PATH=$HOME/lib/tdlib/lib/:$LD_LIBRARY_PATH
 
-# tgt
-export LOCAL_TDLIB_PATH=$HOME/lib/tdlib
-
-# Telegram API configuration
-export API_ID="94575"
-export API_HASH="a3406de8d171bb422bb6ddf3bbd800e2"
-
 # Visual Studio Code configuration
 # export PATH="$HOME/code/bin:$PATH"
-
-# LLVM configuration
-export PATH=$PATH:/usr/lib/llvm14/bin
 
 # Xrandr configuration
 alias start_second_monitor_right='xrandr --output HDMI-1-1 --auto --right-of eDP-1'
