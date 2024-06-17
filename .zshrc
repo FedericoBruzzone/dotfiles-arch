@@ -166,4 +166,4 @@ alias start_second_monitor_above='xrandr --output HDMI-1-1 --auto --above eDP-1'
 alias start_second_monitor_below='xrandr --output HDMI-1-1 --auto --below eDP-1'
 alias stop_second_monitor='xrandr --output HDMI-1-1 --off'
 
-fastfetch
+# fastfetch
