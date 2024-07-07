@@ -109,6 +109,9 @@ source $ZSH/oh-my-zsh.sh
 # rust configuration
 . "$HOME/.cargo/env"
 
+# Export ~/.bin folder
+export PATH="$HOME/.bin:$PATH"
+
 # Git configuration
 alias clear_git_cache='git rm -r --cached .'  # remove all files from the git cache
 alias clear_git_tags='git tag -l | xargs git tag -d'  # remove all tags from the git repository
@@ -156,8 +159,6 @@ export PATH=$PATH:/usr/lib/llvm14/bin
 # dynmic linker configuration
 # export LD_LIBRARY_PATH=$HOME/lib/tdlib/lib/:$LD_LIBRARY_PATH
 
-# Visual Studio Code configuration
-# export PATH="$HOME/code/bin:$PATH"
 
 # Xrandr configuration
 alias start_second_monitor_right='xrandr --output HDMI-1-1 --auto --right-of eDP-1'
