@@ -167,4 +167,9 @@ alias start_second_monitor_above='xrandr --output HDMI-1-1 --auto --above eDP-1'
 alias start_second_monitor_below='xrandr --output HDMI-1-1 --auto --below eDP-1'
 alias stop_second_monitor='xrandr --output HDMI-1-1 --off'
 
+# fzf
+# export FZF_DEFAULT_OPTS='--height 50% --layout reverse --border --multi --preview "cat {}" --preview-window down:50%:wrap'
+source ~/.config/fzf/key-bindings.zsh
+source ~/.config/fzf/completion.zsh
+
 # fastfetch
