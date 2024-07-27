@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+set -e
+
+# sudo systemctl status avahi-daemon
+sudo systemctl start avahi-daemon
+uxplay -reset 1000 -async no -vsync no -s 2360x1640
