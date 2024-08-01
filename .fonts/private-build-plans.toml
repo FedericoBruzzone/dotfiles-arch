@@ -1,0 +1,22 @@
+[buildPlans.IosevkaFcb]
+family = "Iosevka Fcb"
+spacing = "normal"
+serifs = "sans"
+noCvSs = true
+exportGlyphNames = false
+noLigation = true
+
+[buildPlans.IosevkaFcb.variants.design]
+two = "straight-neck-serifed"
+three = "flat-top-serifed"
+seven = "straight-serifed-crossbar"
+zero = "dotted"
+capital-b = "standard-unilateral-serifed"
+capital-c = "unilateral-serifed"
+capital-f = "top-left-serifed"
+b = "toothed-motion-serifed"
+c = "unilateral-serifed"
+f = "tailed-crossbar-at-x-height"
+paren = "large-contour"
+brace = "curly-flat-boundary"
+number-sign = "upright-tall"
