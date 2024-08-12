@@ -144,6 +144,9 @@ vimbib() { # it assumes to have $BIBINPUTS set and with the dir to look into as 
 
 
 # tgt
+alias tgt='~/Documents/tgt/target/release/tgt'
+
+# tgt
 export LOCAL_TDLIB_PATH=$HOME/lib/tdlib
 
 # LLVM configuration
@@ -159,7 +162,6 @@ export PATH=$PATH:/usr/lib/llvm14/bin
 # dynmic linker configuration
 # export LD_LIBRARY_PATH=$HOME/lib/tdlib/lib/:$LD_LIBRARY_PATH
 
-
 # Xrandr configuration
 alias start_second_monitor_right='xrandr --output HDMI-1-1 --auto --right-of eDP-1'
 alias start_second_monitor_left='xrandr --output HDMI-1-1 --auto --left-of eDP-1'
@@ -172,4 +174,5 @@ alias stop_second_monitor='xrandr --output HDMI-1-1 --off'
 source ~/.config/fzf/key-bindings.zsh
 source ~/.config/fzf/completion.zsh
 
-# fastfetch
+# open
+alias open='xdg-open'
