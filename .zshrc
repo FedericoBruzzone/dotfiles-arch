@@ -171,8 +171,13 @@ alias stop_second_monitor='xrandr --output HDMI-1-1 --off'
 
 # fzf
 # export FZF_DEFAULT_OPTS='--height 50% --layout reverse --border --multi --preview "cat {}" --preview-window down:50%:wrap'
-source ~/.config/fzf/key-bindings.zsh
 source ~/.config/fzf/completion.zsh
+source ~/.config/fzf/key-bindings.zsh
+
+# Cursor speed
+alias inc_cursor_speed='xset r rate 400 50'
 
 # open
 alias open='xdg-open'
+
+inc_cursor_speed
