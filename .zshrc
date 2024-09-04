@@ -142,7 +142,6 @@ vimbib() { # it assumes to have $BIBINPUTS set and with the dir to look into as 
   vim -p "${bibs[@]}"
 }
 
-
 # tgt
 alias tgt='~/Documents/tgt/target/release/tgt'
 
@@ -179,5 +178,11 @@ alias inc_cursor_speed='xset r rate 400 50'
 
 # open
 alias open='xdg-open'
+
+# Zed
+alias zed='./zed/target/release/zed &'
+
+# Start Docker
+# systemctl start docker
 
 inc_cursor_speed
