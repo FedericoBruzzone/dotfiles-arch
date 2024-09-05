@@ -180,7 +180,7 @@ alias inc_cursor_speed='xset r rate 400 50'
 alias open='xdg-open'
 
 # Zed
-alias zed='./zed/target/release/zed &'
+alias zed='~/zed/target/release/zed &'
 
 # Start Docker
 # systemctl start docker
