@@ -103,6 +103,11 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+# PS1="%B%F{blue}%n%F{green}@%m %F{yellow}%~%f%b %# "
+# PS1="%n@%m:%~$ "
+# PS2="%_> "
+
+
 # opam configuration
 [[ ! -r /home/fcb/.opam/opam-init/init.zsh ]] || source /home/fcb/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null
 
