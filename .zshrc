@@ -1,18 +1,4 @@
-# required for *formats in vcs_info, see below
-# BLUE="%F{blue}"
-# RED="%F{red}"
-# GREEN="%F{green}"
-# CYAN="%F{cyan}"
-# MAGENTA="%F{magenta}"
-# YELLOW="%F{yellow}"
-# WHITE="%F{white}"
-# NO_COLOR="%f"
-
-HISTFILE=~/.zsh_history
-HISTSIZE=10000
-SAVEHIST=10000
-setopt appendhistory
-
+# ===== Git Support =====
 autoload -Uz vcs_info
 precmd_vcs_info() { vcs_info }
 precmd_functions+=( precmd_vcs_info )
@@ -64,15 +50,33 @@ if [[ $ZSH_VERSION == 4.3.<11->* || $ZSH_VERSION == 4.<4->* || $ZSH_VERSION == <
 fi
 
 # extend default vcs_info in prompt
-zstyle ':vcs_info:*' actionformats "(%s)-[%b|%a%u%c] " "zsh: %r" # zstyle ':vcs_info:*' actionformats "${MAGENTA}(${NO_COLOR}%s${MAGENTA})${YELLOW}-${MAGENTA}[${GREEN}%b${YELLOW}|${RED}%a%u%c${MAGENTA}]${NO_COLOR} " "zsh: %r"
-zstyle ':vcs_info:*' formats       "(%s)-[%b%u%c]%} " "zsh: %r" # zstyle ':vcs_info:*' formats       "${MAGENTA}(${NO_COLOR}%s${MAGENTA})${YELLOW}-${MAGENTA}[${GREEN}%b%u%c${MAGENTA}]${NO_COLOR}%} " "zsh: %r"
+zstyle ':vcs_info:*' actionformats "(%s)-[%b|%a%u%c] " "zsh: %r"
+zstyle ':vcs_info:*' formats       "(%s)-[%b%u%c]%} " "zsh: %r"
 
-
+# ===== Completion =====
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 
-# PS1="%B%F{blue}%n%F{green}@%m %F{yellow}%~%f%b %# "
+# ===== History =====
+HISTFILE=~/.zsh_history
+HISTSIZE=10000
+SAVEHIST=10000
+setopt appendhistory
+
+# ===== Prompt =====
 PS1="%n@%m:%~$ "
 PS2="%_> "
+
+# ===== Key Bindings =====
+bindkey '^[[1;5C' forward-word  # Ctrl + Right Arrow
+bindkey '^[[1;5D' backward-word # Ctrl + Left Arrow
+
+# ===== Alias =====
+alias ls='ls --color=auto'
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
+alias grep='grep --color=auto'
+alias ..='cd ..'
 
 # opam configuration
 [[ ! -r /home/fcb/.opam/opam-init/init.zsh ]] || source /home/fcb/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null
@@ -150,10 +154,8 @@ alias inc_cursor_speed='xset r rate 400 50'
 # open
 alias open='xdg-open'
 
-# Zed
-alias zed='~/zed/target/release/zed &'
-
 # Start Docker
 # systemctl start docker
 
 inc_cursor_speed
+
