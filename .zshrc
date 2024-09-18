@@ -95,6 +95,8 @@ alias clear_git_tags='git tag -l | xargs git tag -d'  # remove all tags from the
 export SVN_EDITOR=nvim
 
 # Latex configuration
+
+export PATH=$PATH:/usr/local/texlive/2024/bin/x86_64-linux
 export BIBINPUTS=$HOME/texmf/tex/latex/adapt-lab/trunk/bibs:.
 
 l4p() {  # it assumes to have $BIBINPUTS set and with the dir to look into as the first one
