@@ -120,7 +120,7 @@ vimbib() { # it assumes to have $BIBINPUTS set and with the dir to look into as 
 }
 
 # tgt
-alias tgt='~/Documents/tgt/target/release/tgt'
+alias tgt='~/dev/tgt/target/release/tgt'
 
 # tgt
 export LOCAL_TDLIB_PATH=$HOME/lib/tdlib
