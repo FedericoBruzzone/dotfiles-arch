@@ -78,14 +78,9 @@ alias l='ls -CF'
 alias grep='grep --color=auto'
 alias ..='cd ..'
 
-# opam configuration
-[[ ! -r /home/fcb/.opam/opam-init/init.zsh ]] || source /home/fcb/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null
-
-# rust configuration
-. "$HOME/.cargo/env"
-
 # Export ~/.bin folder
 export PATH="$HOME/.bin:$PATH"
+
 
 # Git configuration
 alias clear_git_cache='git rm -r --cached .'  # remove all files from the git cache
@@ -94,8 +89,21 @@ alias clear_git_tags='git tag -l | xargs git tag -d'  # remove all tags from the
 # Svn configuration
 export SVN_EDITOR=nvim
 
-# Latex configuration
+# opam configuration
+[[ ! -r /home/fcb/.opam/opam-init/init.zsh ]] || source /home/fcb/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null
 
+# rust configuration
+. "$HOME/.cargo/env"
+
+# Set JAVA_HOME to the desired version
+export JAVA_HOME=/usr/lib/jvm/java-21-openjdk
+export PATH=$JAVA_HOME/bin:$PATH
+
+# LLVM configuration
+export PATH=$PATH:/usr/lib/llvm14/bin
+
+# Latex configuration
+export TEXEDIT="nvim +%d %s"
 export PATH=$PATH:/usr/local/texlive/2024/bin/x86_64-linux
 export BIBINPUTS=$HOME/texmf/tex/latex/adapt-lab/trunk/bibs:.
 
@@ -124,9 +132,6 @@ alias tgt='~/dev/tgt/target/release/tgt'
 
 # tgt
 export LOCAL_TDLIB_PATH=$HOME/lib/tdlib
-
-# LLVM configuration
-export PATH=$PATH:/usr/lib/llvm14/bin
 
 # Telegram API configuration
 # export API_ID="94575"

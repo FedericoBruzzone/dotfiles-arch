@@ -23,6 +23,10 @@
 ;; Set path to include TeXLive
 (setenv "PATH" (concat "/usr/local/texlive/2024/bin/x86_64-linux:" (getenv "PATH")))
 (setq exec-path (append exec-path '("/usr/local/texlive/2024/bin/x86_64-linux")))
+;; Set path to java21
+(setenv "PATH" (concat "/usr/lib/jvm/java-21-openjdk/bin:" (getenv "PATH")))
+(setq exec-path (append exec-path '("/usr/lib/jvm/java-21-openjdk/bin")))
+(setq lsp-java-jdt-download-url "https://www.eclipse.org/downloads/download.php?file=/jdtls/milestones/1.37.0/jdt-language-server-1.37.0-202406271335.tar.gz") ; https://github.com/emacs-lsp/lsp-java/issues/478
 ;; Set path to include rust-analyzer
 (setenv "PATH" (concat "/home/fcb/.cargo/bin:" (getenv "PATH")))
 (setq exec-path (append exec-path '("/home/fcb/.cargo/bin")))
@@ -37,6 +41,11 @@
 )
 
 ;; ========== Set global keybindings ==========
+;; Set auto revert mode for doc-view
+(add-hook 'doc-view-mode-hook 'auto-revert-mode)
+(setq auto-revert-interval 1) ;; checks for changes every 1 second
+
+
 ;; Map C-{ to backward-paragraph
 (global-set-key (kbd "C-{") 'backward-paragraph)
 
@@ -201,35 +210,27 @@
 					 (dired dir)))
     (message "Changed directory to %s" default-directory)))
 
-;; Rust configuration
-(use-package rust-mode
-  :ensure t
-  ;; :config
-  ;; (setq rust-format-on-save t)
-  )
-(use-package lsp-pyright
-  :ensure t
-  :custom (lsp-pyright-langserver-command "pyright") ;; or basedpyright
-  :hook (python-mode . (lambda ()
-                          (require 'lsp-pyright)
-                          (lsp))))  ; or lsp-deferred
-
-;; LSP mode configuration
-(use-package lsp-mode
-  :ensure t
-  :commands lsp
-  :custom
-  (lsp-rust-analyzer-cargo-watch-command "clippy")
-  ;; enable / disable the hints as you prefer:
-  ;; (lsp-inlay-hint-enable t)
-  :bind
-  ("C-c C-c l" . flycheck-list-errors)
-  ("C-c C-c r" . lsp-rename)
-  ("C-c C-c a" . lsp-execute-code-action)
-  ("C-c C-c f" . lsp-format-buffer)
-  :hook
-  (rust-mode . lsp)
-  (c-mode . lsp))
+;; Lsp mode configuration
+  (use-package lsp-mode
+    :ensure t
+    :commands lsp
+    :custom
+    (lsp-rust-analyzer-cargo-watch-command "clippy")
+    ;; enable / disable the hints as you prefer:
+    ;; (lsp-inlay-hint-enable t)
+    :bind
+    ("C-c C-c l" . flycheck-list-errors)
+    ("C-c C-c r" . lsp-rename)
+    ("C-c C-c a" . lsp-execute-code-action)
+    ("C-c C-c f" . lsp-format-buffer)
+    :hook
+    (rust-mode . lsp)
+    (c-mode . lsp)
+    (python-mode . (lambda ()
+                     (require 'lsp-pyright)
+                     (lsp)))
+    (tuareg-mode . lsp)
+    (java-mode . lsp))
 (use-package lsp-ui
   :ensure t
   :commands lsp-ui-mode)
@@ -247,6 +248,60 @@
 	      ("M-<". company-select-first)
 	      ("M->". company-select-last)))
 
+;; Rust configuration
+;;; Rust mode
+(use-package rust-mode
+  :ensure t
+  ;; :config
+  ;; (setq rust-format-on-save t)
+  )
+
+;; Python configuration
+;;; Python LSP
+(use-package lsp-pyright
+  :ensure t
+  :custom (lsp-pyright-langserver-command "pyright") ;; or basedpyright
+  )
+
+;; OCaml configuration
+;;; Ocaml mode
+(use-package tuareg
+  :ensure t
+  :mode (("\\.ocamlinit\\'" . tuareg-mode)))
+;;; Dune mode
+(use-package dune
+  :ensure t)
+;;; OCaml LSP
+(use-package merlin
+  :ensure t
+  :config
+  (add-hook 'tuareg-mode-hook #'merlin-mode)
+  (add-hook 'merlin-mode-hook #'company-mode)
+  ;; we're using flycheck instead
+  (setq merlin-error-after-save nil))
+(use-package merlin-eldoc
+  :ensure t
+  :hook ((tuareg-mode) . merlin-eldoc-setup))
+;;; OCaml Flycheck
+(use-package flycheck-ocaml
+  :ensure t
+  :config
+  (add-hook 'tuareg-mode-hook
+            (lambda ()
+              ;; disable Merlin's own error checking
+              (setq-local merlin-error-after-save nil)
+              ;; enable Flycheck checker
+              (flycheck-ocaml-setup))))
+;;; OCaml utop
+(use-package utop
+  :ensure t
+  :config
+  (add-hook 'tuareg-mode-hook #'utop-minor-mode))
+
+;;; Java configuration
+(use-package lsp-java
+  :ensure t)
+
 ;; Copilot configuration
 (use-package copilot
   :straight (:host github :repo "copilot-emacs/copilot.el" :files ("*.el"))
@@ -257,6 +312,8 @@
   :config
   (define-key copilot-completion-map (kbd "<tab>") 'copilot-accept-completion)
   (define-key copilot-completion-map (kbd "TAB") 'copilot-accept-completion)
+  (define-key copilot-completion-map (kbd "C-<tab>") 'copilot-accept-completion-by-word)
+  (define-key copilot-completion-map (kbd "C-TAB") 'copilot-accept-completion-by-word)
   (add-to-list 'copilot-indentation-alist '(prog-mode 2))
   (add-to-list 'copilot-indentation-alist '(org-mode 2))
   (add-to-list 'copilot-indentation-alist '(text-mode 2))
@@ -264,3 +321,6 @@
   (add-to-list 'copilot-indentation-alist '(emacs-lisp-mode 2)))
 
 (load-file custom-file)
+;; ## added by OPAM user-setup for emacs / base ## 56ab50dc8996d2bb95e7856a6eddb17b ## you can edit, but keep this line
+(require 'opam-user-setup "~/.emacs.d/opam-user-setup.el")
+;; ## end of OPAM user-setup addition for emacs / base ## keep this line
