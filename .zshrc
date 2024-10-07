@@ -156,7 +156,7 @@ source ~/.config/fzf/completion.zsh
 source ~/.config/fzf/key-bindings.zsh
 
 # Cursor speed
-alias inc_cursor_speed='xset r rate 400 50'
+alias inc_cursor_speed='xset r rate 400 65'
 
 # open
 alias open='xdg-open'
