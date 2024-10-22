@@ -1,8 +1,8 @@
 (setq custom-file "~/.emacs.d/.emacs.custom.el")
 (load-file custom-file)
 
-;; (load-theme 'wombat)                            ; Load theme
 ;; (setq split-width-threshold nil)                   ; (setq split-width-threshold 1) -> for horizontal split.
+(load-theme 'misterioso)                           ; Load theme - 'leuven-dark
 (tool-bar-mode -1)                                 ; Disable the toolbar
 (scroll-bar-mode -1)                               ; Disable visible scrollbar
 (menu-bar-mode -1)                                 ; Disable the menu bar
@@ -12,14 +12,12 @@
 (ido-everywhere 1)                                 ; Enable ido-mode everywhere
 (global-display-line-numbers-mode t)               ; Enable line numbers
 (setq display-line-numbers-type 'relative)         ; Relative line numbers
-(set-frame-font "Iosevka Nerd Font Mono 14" nil t) ; Set the font
-;; Set initial size of the frame
-(setq initial-frame-alist
-      (append initial-frame-alist
-              '((left   . 100)
-                (top    . 100)
-                (width  . 150)
-                (height . 30))))
+(winner-mode 1)                                    ; Enable winner mode for window configuration
+(setq-default indent-tabs-mode nil)                ; Disable tabs
+(setq-default tab-width 4)                         ; Set the tab width (adjust as needed)
+(set-frame-font "Fira Mono 14" nil t)              ; Set the font
+;; (set-frame-font "Iosevka Nerd Font Mono 14" nil t) ; Set the font
+
 ;; Set auto revert mode for doc-view
 (add-hook 'doc-view-mode-hook 'auto-revert-mode)
 (setq auto-revert-interval 1) ;; checks for changes every 1 second
@@ -112,7 +110,7 @@
       (eval-print-last-sexp)))
   (load bootstrap-file nil 'nomessage))
 
-;; Smex configuration
+;; Smex configuration - it is used to improve M-x with better sorting
 (use-package smex
   :ensure t
   :bind
@@ -128,48 +126,11 @@
   :ensure t
   :bind
   ("C-S-c C-S-c" . mc/edit-lines)
-  ("C->" . mc/mark-next-like-this)
-  ("C-<" . mc/mark-previous-like-this)
+  ("C-<" . mc/mark-next-like-this)
+  ("C->" . mc/mark-previous-like-this)
   ("C-c C-<" . mc/mark-all-like-this)
   ("C-\"" . mc/skip-to-next-like-this)
   ("C-:" . mc/skip-to-previous-like-this))
-
-;; Fzf configuration
-(use-package fzf
-  :ensure t
-  :demand t ; Force load the package immediately. Without this, we can't use the fzf functions in the :bind section.
-  :bind
-  ("C-c f" . fzf)
-  ("C-c g" . fzf-grep)
-  ("C-c b" . fzf-switch-buffer)
-  ("C-c x" . fzf-directory)
-  ("C-c z" . fzf-find-in-buffer)
-  ("C-c d" . fzf-change-and-open-directory)
-  :config
-  (setq fzf/args "-x --color bw --print-query --margin=1,0 --no-hscroll"
-        fzf/executable "fzf"
-        fzf/git-grep-args "-i --line-number %s"
-        ;; command used for `fzf-grep-*` functions
-        ;; example usage for ripgrep:
-        ;; fzf/grep-command "rg --no-heading -nH"
-        fzf/grep-command "grep -nrH"
-        ;; If nil, the fzf buffer will appear at the top of the window
-        fzf/position-bottom t
-        fzf/window-height 15)
-  (defun fzf-change-and-open-directory ()
-    "Change and open the current directory using fzf."
-    (interactive)
-    (fzf-with-command "find ~ -type d" (lambda (dir)
-					 (setq default-directory (file-name-as-directory dir))
-					 (dired dir)))
-    (message "Changed directory to %s" default-directory)))
-
-;; Projectile configuration
-(use-package projectile
-  :ensure t
-  :config
-  (projectile-mode +1)
-  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map))
 
 ;; Lsp mode configuration
   (use-package lsp-mode
@@ -186,6 +147,7 @@
     ("C-c C-c a" . lsp-execute-code-action)
     ("C-c C-c f" . lsp-format-buffer)
     ("C-c C-c d" . lsp-ui-doc-show)
+    ("C-c C-c u" . lsp-find-references)
     :hook
     (rust-mode . lsp)
     (c-mode . lsp)
@@ -199,10 +161,12 @@
   :commands lsp-ui-mode)
 (use-package flycheck
   :ensure t)
+(setq flycheck-highlighting-mode 'lines)
 (use-package company
   :ensure t
   :custom
   (company-idle-delay 0.1) ;; 0.5 how long to wait until popup
+  (company-minimum-prefix-length 1)
   ;; (company-begin-commands nil) ;; uncomment to disable popup
   :bind
   (:map company-active-map
@@ -210,6 +174,8 @@
 	      ("C-p". company-select-previous)
 	      ("M-<". company-select-first)
 	      ("M->". company-select-last)))
+;; Enable company-mode globally
+(add-hook 'after-init-hook 'global-company-mode)
 
 ;; Rust configuration
 ;;; Rust mode
@@ -260,6 +226,12 @@
   :ensure t
   :config
   (add-hook 'tuareg-mode-hook #'utop-minor-mode))
+;;; OCaml hook
+(add-hook 'tuareg-mode-hook
+          (lambda () (require 'opam-user-setup "~/.emacs.d/opam-user-setup.el")))
+;; ;; ## added by OPAM user-setup for emacs / base ## 56ab50dc8996d2bb95e7856a6eddb17b ## you can edit, but keep this line
+;; (require 'opam-user-setup "~/.emacs.d/opam-user-setup.el")
+;; ;; ## end of OPAM user-setup addition for emacs / base ## keep this line
 
 ;;; Java configuration
 (use-package lsp-java
@@ -282,10 +254,6 @@
   (add-to-list 'copilot-indentation-alist '(text-mode 2))
   (add-to-list 'copilot-indentation-alist '(closure-mode 2))
   (add-to-list 'copilot-indentation-alist '(emacs-lisp-mode 2)))
-
-;; ## added by OPAM user-setup for emacs / base ## 56ab50dc8996d2bb95e7856a6eddb17b ## you can edit, but keep this line
-(require 'opam-user-setup "~/.emacs.d/opam-user-setup.el")
-;; ## end of OPAM user-setup addition for emacs / base ## keep this line
 
 ;; ====== USELESS =====
 ;; ;; Move text up and down
@@ -333,3 +301,47 @@
 ;;   (backward-word)
 ;;   (backward-char))
 ;; (global-set-key (kbd "M-n") 'my-goto-next-word-first-letter)
+
+;; Projectile configuration
+;; (use-package projectile
+;;   :ensure t
+;;   :config
+;;   (projectile-mode +1)
+;;   (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map))
+
+;; Set initial size of the frame
+;; (setq initial-frame-alist
+;;       (append initial-frame-alist
+;;               '((left   . 100)
+;;                 (top    . 100)
+;;                 (width  . 150)
+;;                 (height . 30))))
+
+;; Fzf configuration
+;; (use-package fzf
+;;   :ensure t
+;;   :bind
+;;   ("C-c f" . fzf)
+;;   ("C-c g" . fzf-grep)
+;;   ("C-c b" . fzf-switch-buffer)
+;;   ("C-c x" . fzf-directory)
+;;   ("C-c z" . fzf-find-in-buffer)
+;;   ("C-c d" . fzf-change-and-open-directory)
+;;   :config
+;;   (setq fzf/args "-x --color bw --print-query --margin=1,0 --no-hscroll"
+;;         fzf/executable "fzf"
+;;         fzf/git-grep-args "-i --line-number %s"
+;;         ;; command used for `fzf-grep-*` functions
+;;         ;; example usage for ripgrep:
+;;         ;; fzf/grep-command "rg --no-heading -nH"
+;;         fzf/grep-command "grep -nrH"
+;;         ;; If nil, the fzf buffer will appear at the top of the window
+;;         fzf/position-bottom t
+;;         fzf/window-height 15)
+;;   (defun fzf-change-and-open-directory ()
+;;     "Change and open the current directory using fzf."
+;;     (interactive)
+;;     (fzf-with-command "find ~ -type d" (lambda (dir)
+;; 					 (setq default-directory (file-name-as-directory dir))
+;; 					 (dired dir)))
+;;     (message "Changed directory to %s" default-directory)))
