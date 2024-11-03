@@ -2,7 +2,7 @@
 (load-file custom-file)
 
 ;; (setq split-width-threshold nil)                   ; (setq split-width-threshold 1) -> for horizontal split.
-(load-theme 'misterioso)                           ; Load theme - 'leuven-dark
+(load-theme 'modus-themes)                           ; Load theme - 'leuven-dark
 (tool-bar-mode -1)                                 ; Disable the toolbar
 (scroll-bar-mode -1)                               ; Disable visible scrollbar
 (menu-bar-mode -1)                                 ; Disable the menu bar
@@ -16,7 +16,6 @@
 (setq-default indent-tabs-mode nil)                ; Disable tabs
 (setq-default tab-width 4)                         ; Set the tab width (adjust as needed)
 (set-frame-font "Fira Mono 14" nil t)              ; Set the font
-;; (set-frame-font "Iosevka Nerd Font Mono 14" nil t) ; Set the font
 
 ;; Set auto revert mode for doc-view
 (add-hook 'doc-view-mode-hook 'auto-revert-mode)
