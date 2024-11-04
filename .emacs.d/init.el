@@ -2,7 +2,7 @@
 (load-file custom-file)
 
 ;; (setq split-width-threshold nil)                   ; (setq split-width-threshold 1) -> for horizontal split.
-(load-theme 'modus-themes)                           ; Load theme - 'leuven-dark
+(load-theme 'modus-vivendi)                        ; Load theme
 (tool-bar-mode -1)                                 ; Disable the toolbar
 (scroll-bar-mode -1)                               ; Disable visible scrollbar
 (menu-bar-mode -1)                                 ; Disable the menu bar
@@ -16,21 +16,30 @@
 (setq-default indent-tabs-mode nil)                ; Disable tabs
 (setq-default tab-width 4)                         ; Set the tab width (adjust as needed)
 (set-frame-font "Fira Mono 14" nil t)              ; Set the font
+(setq-default show-trailing-whitespace t)
 
-;; Set auto revert mode for doc-view
+;; Set PATH from shell
+(let ((path (shell-command-to-string ". ~/.zshrc; echo -n $PATH")))
+  (setenv "PATH" path)
+  (setq exec-path
+        (append
+         (split-string-and-unquote path ":")
+         exec-path)))
+
+;; Set auto revert mode for doc-view (reload pdf files when they change)
 (add-hook 'doc-view-mode-hook 'auto-revert-mode)
 (setq auto-revert-interval 1) ;; checks for changes every 1 second
 
-;; Set path to include TeXLive
-(setenv "PATH" (concat "/usr/local/texlive/2024/bin/x86_64-linux:" (getenv "PATH")))
-(setq exec-path (append exec-path '("/usr/local/texlive/2024/bin/x86_64-linux")))
-;; Set path to use java21
-(setenv "PATH" (concat "/usr/lib/jvm/java-21-openjdk/bin:" (getenv "PATH")))
-(setq exec-path (append exec-path '("/usr/lib/jvm/java-21-openjdk/bin")))
-(setq lsp-java-jdt-download-url "https://www.eclipse.org/downloads/download.php?file=/jdtls/milestones/1.37.0/jdt-language-server-1.37.0-202406271335.tar.gz") ; https://github.com/emacs-lsp/lsp-java/issues/478
-;; Set path to include rust-analyzer
-(setenv "PATH" (concat "/home/fcb/.cargo/bin:" (getenv "PATH")))
-(setq exec-path (append exec-path '("/home/fcb/.cargo/bin")))
+;; ;; Set path to include TeXLive
+;; (setenv "PATH" (concat "/usr/local/texlive/2024/bin/x86_64-linux:" (getenv "PATH")))
+;; (setq exec-path (append exec-path '("/usr/local/texlive/2024/bin/x86_64-linux")))
+;; ;; Set path to use java21
+;; (setenv "PATH" (concat "/usr/lib/jvm/java-21-openjdk/bin:" (getenv "PATH")))
+;; (setq exec-path (append exec-path '("/usr/lib/jvm/java-21-openjdk/bin")))
+;; (setq lsp-java-jdt-download-url "https://www.eclipse.org/downloads/download.php?file=/jdtls/milestones/1.37.0/jdt-language-server-1.37.0-202406271335.tar.gz") ; https://github.com/emacs-lsp/lsp-java/issues/478
+;; ;; Set path to include rust-analyzer
+;; (setenv "PATH" (concat "/home/fcb/.cargo/bin:" (getenv "PATH")))
+;; (setq exec-path (append exec-path '("/home/fcb/.cargo/bin")))
 
 ;; Backup files in a separate directory
 (setq backup-directory-alist '(("." . "~/.emacs.d/backup"))
@@ -45,18 +54,8 @@
 (setq auto-save-file-name-transforms
       `((".*" "~/.emacs.d/auto-save-list/" t)))
 
-;; =============== Set global keybindings ===============
-;; Map C-{ to backward-paragraph
-(global-set-key (kbd "C-{") 'backward-paragraph)
-
-;; Map C-} to forward-paragraph
-(global-set-key (kbd "C-}") 'forward-paragraph)
-
 ;; Make ESC quit prompts
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
-
-;; Enable revert-buffer
-(global-set-key (kbd "C-x r") 'revert-buffer)
 
 ;; Duplicate line
 (defun fcb/duplicate-line()
@@ -80,6 +79,7 @@
 (setq package-archives '(("melpa" . "https://melpa.org/packages/")
                          ("org" . "https://orgmode.org/elpa/")
                          ("elpa" . "https://elpa.gnu.org/packages/")))
+                        ;("melpa-stable" . "https://stable.melpa.org/packages/")
 
 (package-initialize)
 (unless package-archive-contents
@@ -90,9 +90,10 @@
    (package-install 'use-package))
 
 (require 'use-package)
+;; Auto-install the package if not installed
 (setq use-package-always-ensure t)
 
-; Set up the straight package manager
+;; Set up the straight package manager
 (defvar bootstrap-version)
 (let ((bootstrap-file
        (expand-file-name
@@ -131,8 +132,15 @@
   ("C-\"" . mc/skip-to-next-like-this)
   ("C-:" . mc/skip-to-previous-like-this))
 
+;; Magit configuration
+(use-package magit
+  :ensure t
+  :pin melpa
+  :bind
+  ("C-x g" . magit-status))
+
 ;; Lsp mode configuration
-  (use-package lsp-mode
+(use-package lsp-mode
     :ensure t
     :commands lsp
     :custom
@@ -175,6 +183,11 @@
 	      ("M->". company-select-last)))
 ;; Enable company-mode globally
 (add-hook 'after-init-hook 'global-company-mode)
+;; Disable company-mode in shell-mode
+(defun disable-company-mode ()
+  "Disable company mode."
+  (company-mode -1))
+(add-hook 'shell-mode-hook 'disable-company-mode)
 
 ;; Rust configuration
 ;;; Rust mode
@@ -235,6 +248,18 @@
 ;;; Java configuration
 (use-package lsp-java
   :ensure t)
+
+(use-package typst-ts-mode
+  :straight '(:type git :host codeberg :repo "meow_king/typst-ts-mode"
+                    :files (:defaults "*.el")))
+
+(with-eval-after-load 'eglot
+  (with-eval-after-load 'typst-ts-mode
+    (add-to-list 'eglot-server-programs
+                 `((typst-ts-mode) .
+                   ,(eglot-alternatives `(,typst-ts-lsp-download-path
+                                          "tinymist"
+                                          "typst-lsp"))))))
 
 ;; Copilot configuration
 (use-package copilot
@@ -344,3 +369,33 @@
 ;; 					 (setq default-directory (file-name-as-directory dir))
 ;; 					 (dired dir)))
 ;;     (message "Changed directory to %s" default-directory)))
+
+;; yasnippet configuration
+;; (use-package yasnippet
+;;   :ensure t
+;;   :config
+;;   (setq yas-snippet-dirs '("~/.emacs.d/snippets"))
+;;   (yas-global-mode 1))
+
+
+;; Enable revert-buffer
+;; (global-set-key (kbd "C-x r") 'revert-buffer)
+
+;; Map C-{ to backward-paragraph
+;; (global-set-key (kbd "C-{") 'backward-paragraph)
+
+;; Map C-} to forward-paragraph
+;; (global-set-key (kbd "C-}") 'forward-paragraph)
+
+;; (defun my-modus-themes-custom-faces ()
+;;   (modus-themes-with-colors
+;;     (custom-set-faces
+;;      `(ediff-current-diff-A ((,class :inherit unspecified :background ,bg-special-faint-cold :foreground ,fg-special-cold)))
+;;      `(ediff-current-diff-B ((,class :inherit unspecified :background ,bg-special-faint-warm :foreground ,fg-special-warm)))
+;;      `(ediff-current-diff-C ((,class :inherit unspecified :background ,bg-special-faint-calm :foreground ,fg-special-calm)))
+;;      `(ediff-fine-diff-A ((,class :inherit unspecified :background ,bg-special-cold :foreground ,fg-special-cold)))
+;;      `(ediff-fine-diff-B ((,class :inherit unspecified :background ,bg-special-warm :foreground ,fg-special-warm)))
+;;      `(ediff-fine-diff-C ((,class :inherit unspecified :background ,bg-special-calm :foreground ,fg-special-calm))))))
+;; ;; This is so that the changes persist when switching between
+;; ;; `modus-operandi' and `modus-vivendi'.
+;; (add-hook 'modus-themes-after-load-theme-hook #'my-modus-themes-custom-faces)
