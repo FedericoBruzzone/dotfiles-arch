@@ -1,0 +1,96 @@
+{
+    // =============== Editor ===============
+    // the number of spaces a tab is equal to
+    "editor.tabSize": 4,
+    // insert spaces when pressing Tab
+    "editor.insertSpaces": true,
+    // Auto indent
+    "editor.autoIndent": "full",
+    // whether to override tabSize based on a file's existing indent level
+    "editor.detectIndentation": true,
+    // Inline suggest is used to show code completion suggestions in the editor
+    "editor.inlineSuggest.enabled": true,
+    // Set font size
+    "editor.fontFamily": "Fira Mono", // Iosevka Nerd Font //"editor.fontLigatures": true,
+    // Relative line numbers
+    "editor.lineNumbers": "relative",
+    // Set font size
+    "editor.fontSize": 15,
+    // Show trailing whitespace
+    "editor.renderWhitespace": "trailing",
+    // Don't show minimap
+    "editor.minimap.enabled": false,
+
+    // =============== Workbench ===============
+    // Set theme
+    "workbench.colorTheme": "Theme Flat",
+    // Keep the primary and secondary sidebar, right and left respectively
+    "workbench.sideBar.location": "left", // DEFAULT
+    // Remove the status bar
+    "workbench.statusBar.visible": true, // DEFAULT
+    // Show only one fine in tab bar
+    "workbench.editor.showTabs": "none",
+    // Remove the activity bar
+    "workbench.activityBar.location": "top",
+    // TOPBAR: Remove layuout controls
+    "workbench.layoutControl.enabled": false,
+    // TOPBAR: Remove editor actions
+    "workbench.editor.editorActionsLocation": "default",
+
+    // =============== Window ===============
+    // Custom title bar visibility
+    "window.customTitleBarVisibility": "auto",
+    // Zoom level of the window
+    "window.zoomLevel": 0,
+    // TOPBAR: Title bar with custom style (menu bar, command center, layout controls, chat controls -> all in one)
+    "window.titleBarStyle": "custom",
+    // TOPBAR: Toggle layout controls
+    "window.menuBarVisibility": "toggle",
+    // TOPBAR: Don't show command center
+    "window.commandCenter": false,
+
+    // =============== Rust ===============
+    "rust-analyzer.rustc.source": "discover",
+
+    // =============== Vim ===============
+    // Set leader key to space
+    "vim.leader": "<space>",
+    // Highlight search results
+    "vim.hlsearch": true,
+    // Don't use ctrl keys of vscode
+    "vim.useCtrlKeys": true,
+    "vim.normalModeKeyBindings": [
+        // Open goto file
+        { "before": [ "<C-p>" ], "commands": [ "workbench.action.quickOpen" ] },
+        // Toggle sidebar visibility
+        { "before": [ "<C-b>" ], "commands": [ "workbench.action.toggleSidebarVisibility" ], },
+        // Toggle pannel visibility
+        { "before": [ "<C-j>" ], "commands": [ "workbench.action.togglePanel" ] },
+        // Find
+        { "before": [ "<C-f>" ], "commands": [ "actions.find" ] },
+        // Remove search highlight
+        { "before": [ "<Esc>", "u" ], "commands": [ ":nohl" ] },
+        // Split editor right
+        { "before": [ "<C-w>", "v" ], "commands": [ "workbench.action.splitEditorRight" ] },
+        // Split editor down
+        { "before": [ "<C-w>", "n" ], "commands": [ "workbench.action.splitEditorDown" ] },
+        // Close all windows in the focused editor group
+        { "before": [ ":", "Q" ], "commands": [ "workbench.action.closeEditorsInGroup" ] },
+    ],
+    "vim.visualModeKeyBindings": [
+        // Move line up
+        { "before": [ "K" ], "commands": [ "editor.action.moveLinesUpAction" ] },
+        // Move line down
+        { "before": [ "J" ], "commands": [ "editor.action.moveLinesDownAction" ] },
+        // Copy to clipboard
+        { "before": ["<leader>", "y"], "after": ["\"", "+", "y"] },
+        // Paste from clipboard
+        { "before": ["<leader>", "p"], "after":  ["\"", "+", "p"] }
+    ],
+
+    // =============== Performance ===============
+    // To improve performance
+    "extensions.experimental.affinity": {
+        "vscodevim.vim": 1
+    },
+}

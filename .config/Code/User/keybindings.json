@@ -1,0 +1,15 @@
+// Place your key bindings in this file to override the defaults
+[
+    // Split editor right
+    { "key": "ctrl+\\", "command": "workbench.action.splitEditorRight", },
+    // Split editor down
+    { "key": "alt+\\", "command": "workbench.action.splitEditorDown", },
+    // Clone editors in group
+    { "key": "shift+ctrl+w", "command": "workbench.action.editorLayoutSingle", },
+    // Close editor
+    // { "key": "ctrl+w", "command": "workbench.action.closeActiveEditor", },
+    // Focus next editor
+    // { "key": "alt+right", "command": "workbench.action.nextEditor", },
+    // Focus previous editor
+    // { "key": "alt+left", "command": "workbench.action.previousEditor", },
+]
