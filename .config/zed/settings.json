@@ -1,0 +1,79 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run `zed: open default settings` from the
+// command palette
+{
+  // "ui_font_size": 16,
+  // "buffer_font_size": 16,
+  // "theme": {
+  //   "mode": "system",
+  //   "light": "One Light",
+  //   "dark": "One Dark"
+  // },
+  // ==================================================
+  // Set theme to Gruvbox
+  "theme": {
+    "mode": "dark",
+    "light": "Gruvbox Light Hard",
+    "dark": "Gruvbox Dark Hard"
+  },
+  // Use vim mode
+  "vim_mode": true,
+  // Set font family
+  "buffer_font_family": "Fira Mono",
+  // Use relative line numbers
+  "relative_line_numbers": true,
+  // Prevent the buffer from scrolling beyond the last line
+  "scroll_beyond_last_line": "off",
+  // Allow cursor to reach edges of screen
+  "vertical_scroll_margin": 0,
+  // Disable blinking cursor
+  "cursor_blink": false,
+  // Remove selections menu, and quick actions
+  "toolbar": {
+    "breadcrumbs": true,
+    "selections_menu": false,
+    "quick_actions": false
+  },
+  // Remove tab bar
+  "tab_bar": {
+    "show": false
+  },
+  // Remove scroll bar
+  "scrollbar": {
+    "show": "never"
+  },
+  // Show whitespaces only in selection
+  "show_whitespaces": "selection",
+
+  // Split settings
+  "pane_split_direction_horizontal": "down",
+
+  // Enable indent guides (default)
+  "indent_guides": {
+    "enabled": true
+  },
+  // Lsp settings
+  "lsp": {
+    "rust-analyzer": {
+      "initialization_options": {
+        "rustc": {
+          "source": "discover"
+        }
+      }
+    },
+    "texlab": {
+      "settings": {
+        "texlab": {
+          "build": {
+            "onSave": false
+          }
+        }
+      }
+    }
+  }
+}
