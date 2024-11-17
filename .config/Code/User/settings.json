@@ -20,16 +20,24 @@
     "editor.renderWhitespace": "trailing",
     // Don't show minimap
     "editor.minimap.enabled": false,
+    // Don't show scrollbars
+    "editor.scrollbar.vertical": "hidden",
+    // Show indent guides lines color
+    "editor.guides.bracketPairs": true,
 
     // =============== Workbench ===============
-    // Set theme
-    "workbench.colorTheme": "Theme Flat",
+    // Set the color theme
+    "workbench.colorTheme": "Gruvbox Dark Hard",
     // Keep the primary and secondary sidebar, right and left respectively
     "workbench.sideBar.location": "left", // DEFAULT
-    // Remove the status bar
-    "workbench.statusBar.visible": true, // DEFAULT
+    // Reveal the editor if it's already open
+    "workbench.editor.revealIfOpen": false,
+    // Close empty groups
+    "workbench.editor.closeEmptyGroups": true, // DEFAULT
     // Show only one fine in tab bar
     "workbench.editor.showTabs": "none",
+    // Remove the status bar
+    "workbench.statusBar.visible": true,
     // Remove the activity bar
     "workbench.activityBar.location": "top",
     // TOPBAR: Remove layuout controls
@@ -40,7 +48,7 @@
     // =============== Window ===============
     // Custom title bar visibility
     "window.customTitleBarVisibility": "auto",
-    // Zoom level of the window
+    // Set zoom level
     "window.zoomLevel": 0,
     // TOPBAR: Title bar with custom style (menu bar, command center, layout controls, chat controls -> all in one)
     "window.titleBarStyle": "custom",
@@ -60,6 +68,10 @@
     // Don't use ctrl keys of vscode
     "vim.useCtrlKeys": true,
     "vim.normalModeKeyBindings": [
+        // Go to the next diagnostic
+        { "before": ["]", "d"], "commands": ["editor.action.marker.nextInFiles"] },
+        // Go to the previous diagnostic
+        { "before": ["[", "d"], "commands": ["editor.action.marker.prevInFiles"] },
         // Open goto file
         { "before": [ "<C-p>" ], "commands": [ "workbench.action.quickOpen" ] },
         // Toggle sidebar visibility
@@ -92,5 +104,11 @@
     // To improve performance
     "extensions.experimental.affinity": {
         "vscodevim.vim": 1
+    },
+
+    // =============== Copilot ===============
+    "github.copilot.enable": {
+        "plaintext": true,
+        "markdown": true,
     },
 }
