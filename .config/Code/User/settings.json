@@ -31,7 +31,7 @@
 
     // =============== Workbench ===============
     // Set the color theme
-    "workbench.colorTheme": "Gruvbox Dark Hard",
+    "workbench.colorTheme": "Gruvbox Light Soft",
     // Keep the primary and secondary sidebar, right and left respectively
     "workbench.sideBar.location": "left", // DEFAULT
     // Reveal the editor if it's already open
@@ -48,6 +48,7 @@
     "workbench.layoutControl.enabled": false,
     // TOPBAR: Remove editor actions
     "workbench.editor.editorActionsLocation": "default",
+
     // =============== Window ===============
     // Custom title bar visibility
     "window.customTitleBarVisibility": "auto",
@@ -59,8 +60,10 @@
     "window.menuBarVisibility": "toggle",
     // TOPBAR: Don't show command center
     "window.commandCenter": false,
+
     // =============== Rust ===============
     "rust-analyzer.rustc.source": "discover",
+
     // =============== Vim ===============
     // Set leader key to space
     "vim.leader": "<space>",
@@ -70,151 +73,42 @@
     "vim.useCtrlKeys": true,
     "vim.normalModeKeyBindings": [
         // Go to the next diagnostic
-        {
-            "before": [
-                "]",
-                "d"
-            ],
-            "commands": [
-                "editor.action.marker.nextInFiles"
-            ]
-        },
+        { "before": [ "]", "d" ], "commands": [ "editor.action.marker.nextInFiles" ] },
         // Go to the previous diagnostic
-        {
-            "before": [
-                "[",
-                "d"
-            ],
-            "commands": [
-                "editor.action.marker.prevInFiles"
-            ]
-        },
+        { "before": [ "[", "d" ], "commands": [ "editor.action.marker.prevInFiles" ] },
         // Open goto file
-        {
-            "before": [
-                "<C-p>"
-            ],
-            "commands": [
-                "workbench.action.quickOpen"
-            ]
-        },
+        { "before": [ "<C-p>" ], "commands": [ "workbench.action.quickOpen" ] },
         // Toggle sidebar visibility
-        {
-            "before": [
-                "<C-b>"
-            ],
-            "commands": [
-                "workbench.action.toggleSidebarVisibility"
-            ],
-        },
+        { "before": [ "<C-b>" ], "commands": [ "workbench.action.toggleSidebarVisibility" ], },
         // Toggle pannel visibility
-        {
-            "before": [
-                "<C-j>"
-            ],
-            "commands": [
-                "workbench.action.togglePanel"
-            ]
-        },
+        { "before": [ "<C-j>" ], "commands": [ "workbench.action.togglePanel" ] },
         // Find
-        {
-            "before": [
-                "<C-f>"
-            ],
-            "commands": [
-                "actions.find"
-            ]
-        },
+        { "before": [ "<C-f>" ], "commands": [ "actions.find" ] },
         // Remove search highlight
-        {
-            "before": [
-                "<Esc>",
-                "u"
-            ],
-            "commands": [
-                ":nohl"
-            ]
-        },
+        { "before": [ "<Esc>", "u" ], "commands": [ ":nohl" ] },
         // Split editor right
-        {
-            "before": [
-                "<C-w>",
-                "v"
-            ],
-            "commands": [
-                "workbench.action.splitEditorRight"
-            ]
-        },
+        { "before": [ "<C-w>", "v" ], "commands": [ "workbench.action.splitEditorRight" ] },
         // Split editor down
-        {
-            "before": [
-                "<C-w>",
-                "n"
-            ],
-            "commands": [
-                "workbench.action.splitEditorDown"
-            ]
-        },
+        { "before": [ "<C-w>", "n" ], "commands": [ "workbench.action.splitEditorDown" ] },
         // Close all windows in the focused editor group
-        {
-            "before": [
-                ":",
-                "Q"
-            ],
-            "commands": [
-                "workbench.action.closeEditorsInGroup"
-            ]
-        },
+        { "before": [ ":", "Q" ], "commands": [ "workbench.action.closeEditorsInGroup" ] },
     ],
     "vim.visualModeKeyBindings": [
         // Move line up
-        {
-            "before": [
-                "K"
-            ],
-            "commands": [
-                "editor.action.moveLinesUpAction"
-            ]
-        },
+        { "before": [ "K" ], "commands": [ "editor.action.moveLinesUpAction" ] },
         // Move line down
-        {
-            "before": [
-                "J"
-            ],
-            "commands": [
-                "editor.action.moveLinesDownAction"
-            ]
-        },
+        { "before": [ "J" ], "commands": [ "editor.action.moveLinesDownAction" ] },
         // Copy to clipboard
-        {
-            "before": [
-                "<leader>",
-                "y"
-            ],
-            "after": [
-                "\"",
-                "+",
-                "y"
-            ]
-        },
+        { "before": [ "<leader>", "y" ], "after": [ "\"", "+", "y" ] },
         // Paste from clipboard
-        {
-            "before": [
-                "<leader>",
-                "p"
-            ],
-            "after": [
-                "\"",
-                "+",
-                "p"
-            ]
-        }
+        { "before": [ "<leader>", "p" ], "after": [ "\"", "+", "p" ] }
     ],
     // =============== Performance ===============
     // To improve performance
     "extensions.experimental.affinity": {
         "vscodevim.vim": 1
     },
+
     // =============== Copilot ===============
     "github.copilot.enable": {
         "plaintext": true,

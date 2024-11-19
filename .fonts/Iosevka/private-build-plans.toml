@@ -1,7 +1,0 @@
-[buildPlans.Iosevka]
-family = "Iosevka"
-spacing = "normal"
-serifs = "sans"
-noCvSs = true
-exportGlyphNames = false
-noLigation = true
