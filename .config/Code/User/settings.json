@@ -1,5 +1,7 @@
 {
     // =============== Editor ===============
+    // The color theme for the workbench
+    "workbench.colorTheme": "Gruvbox Dark Hard",
     // the number of spaces a tab is equal to
     "editor.tabSize": 4,
     // insert spaces when pressing Tab
@@ -15,7 +17,7 @@
     // Relative line numbers
     "editor.lineNumbers": "relative",
     // Set font size
-    "editor.fontSize": 15,
+    "editor.fontSize": 16,
     // Set the line height 
     "editor.lineHeight": 0, // DEFAULT
     // Show trailing whitespace
@@ -28,12 +30,8 @@
     "editor.guides.bracketPairs": true,
     // Change font size with ctrl + mouse wheel
     "editor.mouseWheelZoom": true,
-
-    // =============== Workbench ===============
-    // Set the color theme
-    "workbench.colorTheme": "Gruvbox Dark Hard",
-    // Keep the primary and secondary sidebar, right and left respectively
-    "workbench.sideBar.location": "left", // DEFAULT
+    // Invert the primary and secondary sidebar, right and left respectively
+    "workbench.sideBar.location": "right", // DEFAULT
     // Reveal the editor if it's already open
     "workbench.editor.revealIfOpen": false,
     // Close empty groups
@@ -104,6 +102,8 @@
         { "before": [ "J" ], "commands": [ "editor.action.moveLinesDownAction" ] },
         // Copy to clipboard
         { "before": [ "<leader>", "y" ], "after": [ "\"", "+", "y" ] },
+        // Paste from clipboard
+        { "before": [ "<leader>", "p" ], "after": [ "\"", "+", "p" ] },
         // Delete without copying to clipboard
         { "before": [ "<leader>", "d" ], "after": [ "\"", "_", "d" ] },
     ],
@@ -118,4 +118,8 @@
         "plaintext": true,
         "markdown": true,
     },
+    "errorLens.enabledDiagnosticLevels": [
+        "warning",
+        "info"
+    ],
 }
