@@ -1,7 +1,7 @@
 {
     // =============== Editor ===============
     // The color theme for the workbench
-    "workbench.colorTheme": "Gruvbox Dark Hard",
+    "workbench.colorTheme": "Gruvbox Light Hard",
     // the number of spaces a tab is equal to
     "editor.tabSize": 4,
     // insert spaces when pressing Tab
@@ -122,4 +122,10 @@
         "warning",
         "info"
     ],
+    "[typst]": {
+        "editor.wordSeparators": "`~!@#$%^&*()=+[{]}\\|;:'\",.<>/?"
+    },
+    "[typst-code]": {
+        "editor.wordSeparators": "`~!@#$%^&*()=+[{]}\\|;:'\",.<>/?"
+    },
 }
