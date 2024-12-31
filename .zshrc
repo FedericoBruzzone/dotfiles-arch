@@ -92,6 +92,9 @@ export SVN_EDITOR=nvim
 # opam configuration
 [[ ! -r /home/fcb/.opam/opam-init/init.zsh ]] || source /home/fcb/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null
 
+# ghcup configuration
+[ -f "/home/fcb/.ghcup/env" ] && . "/home/fcb/.ghcup/env" # ghcup-env
+
 # rust configuration
 . "$HOME/.cargo/env"
 
