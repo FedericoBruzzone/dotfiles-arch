@@ -9,4 +9,5 @@ dynamic_padding = true
 history = 100000
 
 [font]
-normal = { family = "Iosevka" }
+# normal = { family = "Iosevka", style = "Regular" }
+normal = { family = "Iosevka Nerd Font", style = "Regular" }
