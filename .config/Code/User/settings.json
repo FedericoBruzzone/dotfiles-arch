@@ -1,8 +1,4 @@
 {
-    // =============== Editor ===============
-    // The color theme for the workbench
-    "workbench.colorTheme": "Gruvbox Light Hard",
-    // the number of spaces a tab is equal to
     "editor.tabSize": 4,
     // insert spaces when pressing Tab
     "editor.insertSpaces": true,
@@ -31,21 +27,23 @@
     // Change font size with ctrl + mouse wheel
     "editor.mouseWheelZoom": true,
     // Invert the primary and secondary sidebar, right and left respectively
-    "workbench.sideBar.location": "right", // DEFAULT
+    "workbench.sideBar.location": "left", // DEFAULT
     // Reveal the editor if it's already open
     "workbench.editor.revealIfOpen": false,
     // Close empty groups
     "workbench.editor.closeEmptyGroups": true, // DEFAULT
     // Show only one fine in tab bar
     "workbench.editor.showTabs": "none",
+    // Show the activity bar at the top
+    "workbench.activityBar.location": "top",
     // Remove the status bar
     "workbench.statusBar.visible": true,
-    // Remove the activity bar
-    "workbench.activityBar.location": "top",
-    // TOPBAR: Remove layuout controls
-    "workbench.layoutControl.enabled": false,
+    // TOPBAR: Remove layout controls
+    "workbench.layoutControl.enabled": true,
     // TOPBAR: Remove editor actions
-    "workbench.editor.editorActionsLocation": "default",
+    "workbench.editor.editorActionsLocation": "default", // DEFAULT
+    // Search mode not in the sidebar but in the editor
+    "search.mode": "reuseEditor",
 
     // =============== Window ===============
     // Custom title bar visibility
@@ -54,13 +52,17 @@
     "window.zoomLevel": 0,
     // TOPBAR: Title bar with custom style (menu bar, command center, layout controls, chat controls -> all in one)
     "window.titleBarStyle": "custom",
-    // TOPBAR: Toggle layout controls
+    // TOPBAR: Toggle menu bar visibility
     "window.menuBarVisibility": "toggle",
     // TOPBAR: Don't show command center
     "window.commandCenter": false,
 
     // =============== Rust ===============
     "rust-analyzer.rustc.source": "discover",
+    "rust-analyzer.runnables.extraEnv": {
+        "PATH": "${env:HOME}/.cargo/bin"
+    },
+    // "rust-analyzer.checkOnSave": false,
 
     // =============== Vim ===============
     // Set leader key to space
@@ -94,6 +96,8 @@
         { "before": [ "<leader>", "p", "e" ], "after": [ "A", " ", "<Esc>", "p" ] },
         // Close all windows in the focused editor group
         { "before": [ ":", "Q" ], "commands": [ "workbench.action.closeEditorsInGroup" ] },
+        // Go to references
+        { "before": [ "g", "r" ], "commands": [ "editor.action.referenceSearch.trigger" ] },
     ],
     "vim.visualModeKeyBindings": [
         // Move line up
@@ -118,14 +122,14 @@
         "plaintext": true,
         "markdown": true,
     },
-    "errorLens.enabledDiagnosticLevels": [
-        "warning",
-        "info"
-    ],
-    "[typst]": {
-        "editor.wordSeparators": "`~!@#$%^&*()=+[{]}\\|;:'\",.<>/?"
-    },
-    "[typst-code]": {
-        "editor.wordSeparators": "`~!@#$%^&*()=+[{]}\\|;:'\",.<>/?"
-    },
+
+    // 
+    "editor.accessibilitySupport": "off",
+    "extensions.ignoreRecommendations": true,
+    "telemetry.telemetryLevel": "crash",
+    "typescript.surveys.enabled": false,
+    "typescript.disableAutomaticTypeAcquisition": true,
+    "update.mode": "none",
+    "workbench.enableExperiments": false,
+    "workbench.settings.enableNaturalLanguageSearch": false,
 }

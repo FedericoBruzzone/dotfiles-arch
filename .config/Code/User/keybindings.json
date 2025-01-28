@@ -8,6 +8,11 @@
     { "key": "shift+ctrl+w", "command": "workbench.action.editorLayoutSingle", },
     // Select the next occurrence of the current word
     { "key": "ctrl+d", "command": "editor.action.addSelectionToNextFindMatch", },
+    // Accept next word of inline suggestion
+    { "key": "ctrl+l", "command": "editor.action.inlineSuggest.acceptNextWord", "when": "inlineSuggestionVisible && !editorReadonly" },
+
+    { "key": "ctrl+alt+i", "command": "workbench.files.action.focusFilesExplorer", },
+
     // Close editor
     // { "key": "ctrl+w", "command": "workbench.action.closeActiveEditor", },
     // Focus next editor
