@@ -167,5 +167,9 @@ alias open='xdg-open'
 # Start Docker
 # systemctl start docker
 
+pkgsize(){
+    pacman -Ss $@ | awk '{if(NR%2) {system("pacman -Si "$1" | grep Ins | cut -d\":\" -f 2 | tr -d \" \n\" "" "); printf " "$1"$";} else print $0}' | sort -h | tr "$" "\n"
+}
+
 inc_cursor_speed
 
